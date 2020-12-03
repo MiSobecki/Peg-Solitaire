@@ -15,7 +15,7 @@ public class GamePhaseInformerWindow extends JLabel {
     }
 
     private void setUp() {
-        setText("There is " + gameBoard.getCountOfBalls() + " balls left");
+        setText("There are " + gameBoard.getCountOfBalls() + " balls left");
         setFont(new Font("SANS_SERIF", Font.PLAIN, 20));
         setHorizontalAlignment(SwingConstants.CENTER);
         setBounds(0, 520, 420, 100);

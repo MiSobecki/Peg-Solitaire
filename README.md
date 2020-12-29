@@ -1,4 +1,4 @@
-# Peg-Solitair
+# Peg-Solitaire
 ### Peg solitaire (or Solo Noble) is a board game for one player involving movement of pegs on a board with holes.
 More information on https://en.wikipedia.org/wiki/Peg_solitaire.
 

@@ -33,23 +33,31 @@ public class PointMover {
 
             if (!p2.includesBall()) {
                 if (x2 - x1 == 120 && abs(y2 - y1) == 0) {
-                    Point.moveBall(p1, p2);
                     Point p3 = gameBoard.getPoint(x2 - 60, y2);
+                    if(!p3.includesBall())
+                        return;
+                    Point.moveBall(p1, p2);
                     p3.removeBall();
                     gameBoard.reduceCountOfBalls();
                 } else if (x2 - x1 == -120 && abs(y2 - y1) == 0) {
-                    Point.moveBall(p1, p2);
                     Point p3 = gameBoard.getPoint(x2 + 60, y2);
+                    if(!p3.includesBall())
+                        return;
+                    Point.moveBall(p1, p2);
                     p3.removeBall();
                     gameBoard.reduceCountOfBalls();
                 } else if (y2 - y1 == 120 && abs(x2 - x1) == 0) {
-                    Point.moveBall(p1, p2);
                     Point p3 = gameBoard.getPoint(x2, y2 - 60);
+                    if(!p3.includesBall())
+                        return;
+                    Point.moveBall(p1, p2);
                     p3.removeBall();
                     gameBoard.reduceCountOfBalls();
                 } else if (y2 - y1 == -120 && abs(x2 - x1) == 0) {
-                    Point.moveBall(p1, p2);
                     Point p3 = gameBoard.getPoint(x2, y2 + 60);
+                    if(!p3.includesBall())
+                        return;
+                    Point.moveBall(p1, p2);
                     p3.removeBall();
                     gameBoard.reduceCountOfBalls();
                 }

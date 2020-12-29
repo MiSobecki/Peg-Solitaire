@@ -4,8 +4,11 @@ import actions.PointMover;
 import structures.numerators.TypeOfBoard;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -122,18 +125,21 @@ public class GameMenuWindow extends JMenuBar {
         boardTypeChooser.add(britishType);
         boardTypeChooser.add(europeanType);
 
-        JColorChooser colorChooser = new JColorChooser();
         boardColorChooser.addActionListener(e -> {
+            JColorChooser colorChooser = new JColorChooser();
+            colorChooser.getSelectionModel().setSelectedColor(Color.BLACK);
             ActionListener okListener = e1 -> boardColor = colorChooser.getColor();
-            JDialog dialog = JColorChooser.createDialog(this, "CHOOSE", true, colorChooser, okListener, null);
+            JDialog dialog = JColorChooser.createDialog(this, "Choose a board color", true, colorChooser, okListener, null);
             dialog.setVisible(true);
             gameBoardWindow.setBoardColor(boardColor);
             gameBoardWindow.repaint();
         });
 
         pawnColorChooser.addActionListener(e -> {
+            JColorChooser colorChooser = new JColorChooser();
+            colorChooser.getSelectionModel().setSelectedColor(Color.BLUE);
             ActionListener okListener = e1 -> pawnColor = colorChooser.getColor();
-            JDialog dialog = JColorChooser.createDialog(this, "CHOOSE", true, colorChooser, okListener, null);
+            JDialog dialog = JColorChooser.createDialog(this, "Choose a pawn color", true, colorChooser, okListener, null);
             dialog.setVisible(true);
             gameBoardWindow.setPawnColor(pawnColor);
             gameBoardWindow.repaint();

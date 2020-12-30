@@ -13,16 +13,22 @@ public class GameBoard {
 
     public GameBoard(TypeOfBoard typeOfBoard) {
         setOfPoints = new ArrayList<>();
-        if (typeOfBoard == TypeOfBoard.BRITISH) fillBritishBoard();
-        else fillEuropeanBoard();
+        if (typeOfBoard == TypeOfBoard.BRITISH)
+            fillBritishBoard(0);
+        else if (typeOfBoard == TypeOfBoard.EUROPEAN)
+            fillEuropeanBoard(0);
+        else if (typeOfBoard == TypeOfBoard.DIAMOND)
+            fillDiamondBoard();
+        else if (typeOfBoard == TypeOfBoard.WIEGLEB)
+            fillWieglebBoard();
     }
 
-    private void fillBritishBoard() {
+    private void fillBritishBoard(int offset) {
 
         // fill 3 middle lines
         for (int x = 2; x <= 4; x++) {
             for (int y = 0; y <= 6; y++) {
-                setOfPoints.add(new Point(x * 60, y * 60));
+                setOfPoints.add(new Point(x * 60 + offset, y * 60 + offset));
                 countOfBalls++;
             }
         }
@@ -30,7 +36,7 @@ public class GameBoard {
         // fill 2 left lines
         for (int x = 0; x <= 1; x++) {
             for (int y = 2; y <= 4; y++) {
-                setOfPoints.add(new Point(x * 60, y * 60));
+                setOfPoints.add(new Point(x * 60 + offset, y * 60 + offset));
                 countOfBalls++;
             }
         }
@@ -38,29 +44,62 @@ public class GameBoard {
         // fill 2 right lines
         for (int x = 5; x <= 6; x++) {
             for (int y = 2; y <= 4; y++) {
-                setOfPoints.add(new Point(x * 60, y * 60));
+                setOfPoints.add(new Point(x * 60 + offset, y * 60 + offset));
                 countOfBalls++;
             }
         }
 
         // setting middle point to don't have ball
-        Point middlePoint = getPoint(3 * 60, 3 * 60);
+        Point middlePoint = getPoint(3 * 60 + offset, 3 * 60 + offset);
         middlePoint.removeBall();
         countOfBalls--;
     }
 
-    private void fillEuropeanBoard() {
-        fillBritishBoard();
+    private void fillEuropeanBoard(int offset) {
+        fillBritishBoard(offset);
 
         // fill 4 points that didn't occur in british type of board
-        setOfPoints.add(new Point(60, 60));
+        setOfPoints.add(new Point(60 + offset, 60 + offset));
         countOfBalls++;
-        setOfPoints.add(new Point(300, 60));
+        setOfPoints.add(new Point(300 + offset, 60 + offset));
         countOfBalls++;
-        setOfPoints.add(new Point(60, 300));
+        setOfPoints.add(new Point(60 + offset, 300 + offset));
         countOfBalls++;
-        setOfPoints.add(new Point(300, 300));
+        setOfPoints.add(new Point(300 + offset, 300 + offset));
         countOfBalls++;
+    }
+
+    private void fillDiamondBoard() {
+        fillEuropeanBoard(60);
+
+        //fill the 4 points that didn't occur in the European Board
+        setOfPoints.add(new Point(480, 240));
+        countOfBalls++;
+        setOfPoints.add(new Point(0, 240));
+        countOfBalls++;
+        setOfPoints.add(new Point(240, 0));
+        countOfBalls++;
+        setOfPoints.add(new Point(240, 480));
+        countOfBalls++;
+    }
+
+    private void fillWieglebBoard() {
+        fillBritishBoard(60);
+
+        //fill the 12 points that don't occur in the British Board
+        for (int i = 3; i < 6; i++) {
+            setOfPoints.add(new Point(i * 60, 0));
+            countOfBalls++;
+            setOfPoints.add(new Point(i * 60, 480));
+            countOfBalls++;
+        }
+
+        for (int i = 3; i < 6; i++) {
+            setOfPoints.add(new Point(0, i * 60));
+            countOfBalls++;
+            setOfPoints.add(new Point(480, i * 60));
+            countOfBalls++;
+        }
     }
 
     public Point getPoint(int x, int y) throws IllegalArgumentException {

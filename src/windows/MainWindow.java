@@ -12,16 +12,28 @@ public class MainWindow extends JFrame {
 
     private final Color boardColor, pawnColor;
     private final TypeOfBoard typeOfBoard;
+    private final int x,y;
 
     public MainWindow(Color boardColor, Color pawnColor, TypeOfBoard typeOfBoard) {
         this.typeOfBoard = typeOfBoard;
         this.boardColor = boardColor;
         this.pawnColor = pawnColor;
+        this.x = 432;
+        this.y = 620;
+        setUpWindow();
+    }
+
+    MainWindow(Color boardColor, Color pawnColor, TypeOfBoard typeOfBoard,int x,int y){
+        this.typeOfBoard = typeOfBoard;
+        this.boardColor = boardColor;
+        this.pawnColor = pawnColor;
+        this.x = x;
+        this.y = y;
         setUpWindow();
     }
 
     public void setUpWindow() {
-        setSize(432, 620);
+        setSize(x, y);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(null);

@@ -54,7 +54,11 @@ public class GameMenuWindow extends JMenuBar {
 
         newGame.addActionListener(e -> {
             mainWindow.dispose();
-            new MainWindow(boardColor, pawnColor, typeOfBoard);
+            if(typeOfBoard == TypeOfBoard.DIAMOND || typeOfBoard == TypeOfBoard.WIEGLEB)
+                new MainWindow(boardColor, pawnColor, typeOfBoard, 552, 740);
+            else
+                new MainWindow(boardColor, pawnColor, typeOfBoard);
+
         });
 
         end.addActionListener(e -> mainWindow.dispose());
@@ -112,15 +116,27 @@ public class GameMenuWindow extends JMenuBar {
 
         JRadioButtonMenuItem britishType = new JRadioButtonMenuItem("British board");
         JRadioButtonMenuItem europeanType = new JRadioButtonMenuItem("European board");
+        JRadioButtonMenuItem diamondType = new JRadioButtonMenuItem("Diamond board");
+        JRadioButtonMenuItem wieglebType = new JRadioButtonMenuItem("Wiegleb board (German)");
 
-        if (typeOfBoard == TypeOfBoard.BRITISH) britishType.setSelected(true);
-        else europeanType.setSelected(true);
+        if (typeOfBoard == TypeOfBoard.BRITISH)
+            britishType.setSelected(true);
+        else if (typeOfBoard == TypeOfBoard.EUROPEAN)
+            europeanType.setSelected(true);
+        else if (typeOfBoard == TypeOfBoard.DIAMOND)
+            diamondType.setSelected(true);
+        else if (typeOfBoard == TypeOfBoard.WIEGLEB)
+            wieglebType.setSelected(true);
 
         britishType.addActionListener(e -> typeOfBoard = TypeOfBoard.BRITISH);
         europeanType.addActionListener(e -> typeOfBoard = TypeOfBoard.EUROPEAN);
+        diamondType.addActionListener(e -> typeOfBoard = TypeOfBoard.DIAMOND);
+        wieglebType.addActionListener(e -> typeOfBoard = TypeOfBoard.WIEGLEB);
 
         boardTypeChooser.add(britishType);
         boardTypeChooser.add(europeanType);
+        boardTypeChooser.add(diamondType);
+        boardTypeChooser.add(wieglebType);
 
         boardColorChooser.addActionListener(e -> {
             JColorChooser colorChooser = new JColorChooser();
@@ -144,6 +160,8 @@ public class GameMenuWindow extends JMenuBar {
 
         settings.add(britishType);
         settings.add(europeanType);
+        settings.add(diamondType);
+        settings.add(wieglebType);
         settings.add(boardColorChooser);
         settings.add(pawnColorChooser);
         settings.add(fillChooser);

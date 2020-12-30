@@ -2,5 +2,7 @@ package structures.numerators;
 
 public enum TypeOfBoard {
     BRITISH,
-    EUROPEAN
+    EUROPEAN,
+    DIAMOND,
+    WIEGLEB
 }

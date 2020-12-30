@@ -5,6 +5,7 @@ import structures.numerators.TypeOfBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -122,15 +123,21 @@ public class GameMenuWindow extends JMenuBar {
         boardTypeChooser.add(europeanType);
 
         boardColorChooser.addActionListener(e -> {
-            boardColor = JColorChooser.showDialog(this, "Choose board color",
-                    Color.black);
+            JColorChooser colorChooser = new JColorChooser();
+            colorChooser.getSelectionModel().setSelectedColor(Color.BLACK);
+            ActionListener okListener = e1 -> boardColor = colorChooser.getColor();
+            JDialog dialog = JColorChooser.createDialog(this, "Choose a board color", true, colorChooser, okListener, null);
+            dialog.setVisible(true);
             gameBoardWindow.setBoardColor(boardColor);
             gameBoardWindow.repaint();
         });
 
         pawnColorChooser.addActionListener(e -> {
-            pawnColor = JColorChooser.showDialog(this, "Choose pawn color",
-                    Color.black);
+            JColorChooser colorChooser = new JColorChooser();
+            colorChooser.getSelectionModel().setSelectedColor(Color.BLUE);
+            ActionListener okListener = e1 -> pawnColor = colorChooser.getColor();
+            JDialog dialog = JColorChooser.createDialog(this, "Choose a pawn color", true, colorChooser, okListener, null);
+            dialog.setVisible(true);
             gameBoardWindow.setPawnColor(pawnColor);
             gameBoardWindow.repaint();
         });

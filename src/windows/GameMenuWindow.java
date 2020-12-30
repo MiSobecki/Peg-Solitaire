@@ -54,7 +54,7 @@ public class GameMenuWindow extends JMenuBar {
 
         newGame.addActionListener(e -> {
             mainWindow.dispose();
-            if(typeOfBoard == TypeOfBoard.DIAMOND || typeOfBoard == TypeOfBoard.WIEGLEB)
+            if (typeOfBoard == TypeOfBoard.DIAMOND || typeOfBoard == TypeOfBoard.WIEGLEB)
                 new MainWindow(boardColor, pawnColor, typeOfBoard, 552, 740);
             else
                 new MainWindow(boardColor, pawnColor, typeOfBoard);

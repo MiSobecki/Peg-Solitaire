@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
 
     private final Color boardColor, pawnColor;
     private final TypeOfBoard typeOfBoard;
-    private final int x,y;
+    private final int x, y;
 
     public MainWindow(Color boardColor, Color pawnColor, TypeOfBoard typeOfBoard) {
         this.typeOfBoard = typeOfBoard;
@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
         setUpWindow();
     }
 
-    MainWindow(Color boardColor, Color pawnColor, TypeOfBoard typeOfBoard,int x,int y){
+    MainWindow(Color boardColor, Color pawnColor, TypeOfBoard typeOfBoard, int x, int y) {
         this.typeOfBoard = typeOfBoard;
         this.boardColor = boardColor;
         this.pawnColor = pawnColor;
@@ -40,11 +40,14 @@ public class MainWindow extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
+        GameTimer gameTimer = new GameTimer();
+        Timer refreshTime = new Timer(1000, e -> gameTimer.updateTime());   //update the game timer
+        refreshTime.start();
+
         Container contentPane = getContentPane();
         contentPane.setBounds(0, 0, 420, 620);
-
         GameBoard gameBoard = new GameBoard(typeOfBoard);
-        GamePhaseInformerWindow gamePhaseInformerWindow = new GamePhaseInformerWindow(gameBoard);
+        GamePhaseInformerWindow gamePhaseInformerWindow = new GamePhaseInformerWindow(gameBoard, refreshTime);
         GameBoardWindow gameBoardWindow = new GameBoardWindow(gameBoard, boardColor, pawnColor);
         PointMover pointMover = new PointMover(gameBoard,
                 gameBoardWindow, gamePhaseInformerWindow);
@@ -53,11 +56,11 @@ public class MainWindow extends JFrame {
         GameBoardMover gameBoardMover = new GameBoardMover(pointMover, this);
 
         gameBoardWindow.addMouseListener(gameBoardMover);
-
         setJMenuBar(gameMenuWindow);
         contentPane.setLayout(new BorderLayout());
         contentPane.add(gamePhaseInformerWindow, BorderLayout.SOUTH);
         contentPane.add(gameBoardWindow, BorderLayout.CENTER);
+        contentPane.add(gameTimer, BorderLayout.NORTH);
 
         SwingUtilities.updateComponentTreeUI(this);
     }
